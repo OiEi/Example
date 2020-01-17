@@ -17,7 +17,6 @@ namespace Example
             Database.SetInitializer(new MyContextInitializer());
         }
 
-
         public new IDbSet<T> Set<T>() where T : class
         {
             return base.Set<T>();
@@ -26,7 +25,9 @@ namespace Example
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            modelBuilder.Entity<Student>();
+            modelBuilder.Entity<Employee>();
+            modelBuilder.Entity<Company>();
+            modelBuilder.Entity<Pasport>();
             base.OnModelCreating(modelBuilder);
         }
     }

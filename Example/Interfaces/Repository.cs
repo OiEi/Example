@@ -1,9 +1,7 @@
-﻿using Example.Models;
-using System;
-using System.Collections.Generic;
+﻿
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
+
 
 namespace Example.Interfaces
 {
@@ -13,8 +11,7 @@ namespace Example.Interfaces
                 
         public Repository(IMyDbContext context)
         {
-            _context = context;
-                        
+            _context = context;               
         }
 
         public IQueryable<T> GetAll<T>() where T : class
@@ -37,9 +34,9 @@ namespace Example.Interfaces
             this._context.SaveChanges();
         }
 
-        /*public Student GetById(int id)
+/*        public Employee GetById(int id)
         {
-            return _context.Students.FirstOrDefault(p => p.Id == id);
+            return _context.Employees.FirstOrDefault(p => p.Id == id);
         }*/
 
         /*public void Add(Student product)
