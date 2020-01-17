@@ -1,4 +1,5 @@
 using Example.Interfaces;
+using Example.Models;
 using System.Web.Http;
 using Unity;
 using Unity.Lifetime;
@@ -17,8 +18,8 @@ namespace Example
 
             // e.g. container.RegisterType<ITestService, TestService>();
 
-            container.RegisterType<IRepository, Repository>(new PerThreadLifetimeManager());
-            container.RegisterType<IMyDbContext, MyDbContext>(new PerThreadLifetimeManager());
+            container.RegisterType<IRepository, Repository>();
+            container.RegisterType<IMyDbContext, MyDbContext>();
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
     }

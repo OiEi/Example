@@ -113,6 +113,7 @@
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\Repository.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="MyContextInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\MyDbContext.cs" />
   </ItemGroup>

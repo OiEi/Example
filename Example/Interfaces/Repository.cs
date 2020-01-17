@@ -9,31 +9,46 @@ namespace Example.Interfaces
 {
     public class Repository : IRepository
     {
-        //private MyDbContext db = new MyDbContext();
-
-        private IMyDbContext _context;
-        public Repository(IMyDbContext repository)
+        private readonly IMyDbContext _context;
+                
+        public Repository(IMyDbContext context)
         {
-            _context = repository;
+            _context = context;
+                        
         }
 
-        public IEnumerable<Student> GetAll()
+        public IQueryable<T> GetAll<T>() where T : class
         {
-            return _context.Students;
+            return GetEntities<T>().AsQueryable();
         }
 
-        public Student GetById(int id)
+        public void Insert<T>(T entity) where T : class
+        {
+            GetEntities<T>().Add(entity);
+        }
+
+        private IDbSet<T> GetEntities<T>() where T : class
+        {
+            return _context.Set<T>();
+        }
+
+        public void SaveChanges()
+        {
+            this._context.SaveChanges();
+        }
+
+        /*public Student GetById(int id)
         {
             return _context.Students.FirstOrDefault(p => p.Id == id);
-        }
+        }*/
 
-        public void Add(Student product)
+        /*public void Add(Student product)
         {
             _context.Students.Add(product);
             _context.SaveChanges();
-        }
+        }*/
 
-        protected void Dispose(bool disposing)
+        /*protected void Dispose(bool disposing)
         {
             if (disposing)
             {
@@ -43,13 +58,13 @@ namespace Example.Interfaces
                     _context = null;
                 }
             }
-        }
+        }*/
 
-        public void Dispose()
+        /*public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
-        }
+        }*/
 
     }
 }

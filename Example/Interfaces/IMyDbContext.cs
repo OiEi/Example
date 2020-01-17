@@ -7,11 +7,12 @@ using System.Data.Entity.Infrastructure;
 
 namespace Example.Interfaces
 {
-    public interface IMyDbContext
+    public interface IMyDbContext : IDisposable
     {
-        DbSet<Student> Students { get; set; }
+        
+        IDbSet<T> Set<T>() where T : class;
         DbEntityEntry<T> Entry<T>(T entity) where T : class;
         int SaveChanges();
-        void Dispose();
+        
     }
 }

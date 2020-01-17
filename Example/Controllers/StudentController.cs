@@ -7,16 +7,16 @@ namespace Example.Controllers
 {
     public class StudentController : ApiController
     {
-        private readonly IRepository _repository;
+        private readonly IRepository _studentrepository;
         public StudentController(IRepository repository)
         {
-            _repository = repository;
+            _studentrepository = repository;
         }
 
         [Route("api/getall")]
-        public  IEnumerable<Student> GetAll()
+        public  IEnumerable<Student> GetAllStudent()
         {
-            return _repository.GetAll();
+            return _studentrepository.GetAll<Student>();
         }
     }
 }
