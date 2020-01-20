@@ -2,6 +2,7 @@
 using Example.Models;
 using System.Collections.Generic;
 using System.Web.Http;
+using System.Linq;
 
 namespace Example.Controllers
 {
@@ -13,19 +14,16 @@ namespace Example.Controllers
             _repo = repository;
         }
 
-        [Route("api/get_all/employee")]
+        [Route("api/get_employees")]
         public  IEnumerable<Employee> GetAllEmployee()
         {
             return _repo.GetAll<Employee>();
         }
-
-/*        [Route("api/get_empl/{companyid}")]
-        public IEnumerable<Employee> GetEmplInCompany(int companyid)
+               
+        [Route("api/get_empl/{companyid}")]
+        public List<Employee> GetEmplInCompany(int companyid)
         {
-            return _repo.GetAll<Company>();
-        }*/
-
-
-
+            return (from u in _repo.GetAll<Employee>() where u.CompanyId == companyid select u).ToList();
+        }
     }
 }
