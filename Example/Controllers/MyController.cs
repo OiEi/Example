@@ -19,19 +19,20 @@ namespace Example.Controllers
         [Route("api/get_employees")]
         public IEnumerable<Employee> GetAllEmployee()
         {
-            return _repo.GetAll<Employee>();
+            return _repo.GetEntity<Employee>();
         }
 
         [Route("api/get_empl/{companyid}")]
         public List<Employee> GetEmplInCompany(int companyid)
         {
-            return (from e in _repo.GetAll<Employee>() where e.CompanyId == companyid select e).ToList();
+            
+            return  _repo.GetEntity<Employee>().Where(e=> e.CompanyId == companyid).ToList();
         }
 
         [Route("api/delete_empl/{Id}")]
         public HttpResponseMessage Delete(int Id)
         {
-            var employee = (from e in _repo.GetAll<Employee>() where e.id == Id select e).FirstOrDefault();
+            var employee = _repo.GetEntity<Employee>().Where(e=> e.id == Id).FirstOrDefault();
             if (employee == null)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, $"Employee with id {Id} not found");

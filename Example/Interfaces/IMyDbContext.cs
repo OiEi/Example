@@ -14,8 +14,6 @@ namespace Example.Interfaces
         IDbSet<T> Set<T>() where T : class;
         DbEntityEntry<T> Entry<T>(T entity) where T : class;
         int SaveChanges();
-        
-        
-        //IDbSet<T>Find<T>(T id) where T : class;
+ 
     }
 }
