@@ -25,20 +25,25 @@ namespace Example.Controllers
         [Route("api/get_empl/{companyid}")]
         public List<Employee> GetEmplInCompany(int companyid)
         {
-            return (from u in _repo.GetAll<Employee>() where u.CompanyId == companyid select u).ToList();
+            return (from e in _repo.GetAll<Employee>() where e.CompanyId == companyid select e).ToList();
         }
-/*        [Route("api/delete_empl/{employeeid}")]
+
+        [Route("api/delete_empl/{Id}")]
         public HttpResponseMessage Delete(int Id)
         {
-            var employee = (from u in _repo.GetAll<Employee>() where u.id == Id select u);
+            var employee = (from e in _repo.GetAll<Employee>() where e.id == Id select e).FirstOrDefault();
             if (employee == null)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, $"Employee with id {Id} not found");
             }
             else
-            {
-                                
+            {                
+                _repo.DeleteEntity(employee);
+                _repo.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK, $"Employee with id {Id} was remove");
             }
-        }*/
+        }
+
+
     }
 }
