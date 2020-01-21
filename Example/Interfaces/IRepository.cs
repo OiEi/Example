@@ -10,7 +10,7 @@ namespace Example.Interfaces
     {
         IQueryable<T>GetAll<T>() where T : class;
         void Insert<T>(T entity) where T : class;
-        //Employee GetById(int id);
-        //void Add(Student product);
+        void Delete<T>(T entity) where T : class;
+        
     }
 }

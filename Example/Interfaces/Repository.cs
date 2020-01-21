@@ -30,11 +30,22 @@ namespace Example.Interfaces
             return _context.Set<T>();
         }
 
+        public void Delete<T>(T entity) where T : class
+        {
+            GetEntities<T>().Remove(entity);
+        }
+        
+        
         public void SaveChanges()
         {
             this._context.SaveChanges();
         }
 
+/*        public IDbSet<T> GetById<T>(object id) where T : class
+        {
+            return _context.Set<T>().Find(id);
+           return GetEntities<T>().Find(object[id]);
+        }*/
 
 
     }
